@@ -1,0 +1,7 @@
+As interfaces dentro do java servem para criar uma espécie de "molde" 
+para aqueles que vão utilizalas. Ou seja, aquelas classes baseadas em interfaces são
+obrigadas a implementarem os métodos e outras regras que a interface possuí, isso
+garante confiabilidade e previsibilidade de como a classe se comporta ou pelo menos deveria se comportar.
+    Um exemplo de utilização dessa interface é quando existem regras que deverão ser 
+seguidas igualmente por mais de uma entidade. Externaliza tais regras em uma interface e 
+implementa a mesma onde é obrigatório seguir o padrão.
