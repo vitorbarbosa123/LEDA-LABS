@@ -1,7 +1,8 @@
 package sorting.simpleSorting;
 
-import sorting.AbstractSorting;
+import java.util.Arrays;
 
+import sorting.AbstractSorting;
 /**
  * As the insertion sort algorithm iterates over the array, it makes the
  * assumption that the visited positions are already sorted in ascending order,
@@ -12,7 +13,18 @@ public class InsertionSort<T extends Comparable<T>> extends AbstractSorting<T> {
 
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not Implemented yet!");
+
+		for(int j = leftIndex; j < rightIndex; j++) {
+			T key = array[j];
+			int i = j - 1;
+
+			while(j >= 0 && array[j].compareTo(key) > 0) {
+				array[i+1] = array[i];
+				i -= 1;
+			}
+			array[i+1] = key;
+		}
+
+		System.out.println(Arrays.toString(array));
 	}
 }
