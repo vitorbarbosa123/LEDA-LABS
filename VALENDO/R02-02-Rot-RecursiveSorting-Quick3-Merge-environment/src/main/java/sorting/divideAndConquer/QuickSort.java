@@ -19,31 +19,24 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
 		if(leftIndex < rightIndex) {
 			int pivot = partition(array, leftIndex, rightIndex);
 
+            sort(array,leftIndex, pivot - 1);
 			sort(array, pivot + 1, rightIndex);
-		}
+
+        }
 	}
 
 	public int partition(T[] values, int left, int right){
 
-        // melhorias: alteração do pivot por um valor aleatório no array
-        int range = right - left + 1;
-        int rand_pivot_index = (int)(Math.random() * range) + left;
+        int i = left; 
+        T pivot = values[left];
 
-        // troca do valor aleatório com a primeira opção
-        Util.swap(values, left, rand_pivot_index);
-
-        int pivot = (int) values[left];
-        int i = left;
-
-        for(int j = left + 1; j <= right; j++) { // right = values.length - 1
-            if(values[j].compareTo(values[pivot]) <= 0) {
-                i+= 1;
-                Util.swap(values,i,j);
+            for(int j = left + 1; j < values.length; j++) {
+                if(values[j].compareTo(pivot) < 0) {
+                    i += 1;
+                    Util.swap(values, i, j);
+                }
             }
-        }
-        // troca o pivot (values[left]) com i
-        Util.swap(values,left, i);
-
+            Util.swap(values, i, left);
     return i;
     }
 }
