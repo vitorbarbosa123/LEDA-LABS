@@ -7,10 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import sorting.AbstractSorting;
-
-import sorting.simpleSorting.BubbleSort;
-import sorting.simpleSorting.InsertionSort;
-import sorting.simpleSorting.SelectionSort;
+import sorting.divideAndConquer.MergeSort;
+import sorting.divideAndConquer.QuickSort;
 
 public class StudentSortingTest {
 
@@ -42,8 +40,8 @@ public class StudentSortingTest {
 	private void getImplementation() {
 		// TODO O aluno deve instanciar sua implementação abaixo ao invés de
 		// null
-		this.implementation = new SelectionSort<Integer>();
-		//Assert.fail("Implementation not provided");
+		this.implementation = new QuickSort();
+
 	}
 
 	public void populaVetorTamanhoPar(Integer[] arrayPadrao) {
