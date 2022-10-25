@@ -14,16 +14,19 @@ public class SelectionSort<T extends Comparable<T>> extends AbstractSorting<T> {
 
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
-		int n = array.length;
+		while (rightIndex > leftIndex) {
+			int chosenIndex = leftIndex;
 
-		for (int i = 1; i > n; i++) {
-			int min = i;
-			if(array[i].compareTo(array[min]) > 0) {
-				min = i;
+			for (int i = leftIndex; i <= rightIndex; i++) {
+				
+				if (array[i].compareTo(array[chosenIndex]) < 0) {
+					chosenIndex = i;
+				}
 			}
-			Util.swap(array,i,min);
+			if (leftIndex != chosenIndex) {
+				Util.swap(array, leftIndex, chosenIndex);
+			}
+			leftIndex++;
 		}
-
-		System.out.println(Arrays.toString(array));
 	}
 }
