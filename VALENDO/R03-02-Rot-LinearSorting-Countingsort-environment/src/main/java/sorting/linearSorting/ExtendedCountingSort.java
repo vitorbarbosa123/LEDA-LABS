@@ -23,17 +23,23 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 		for (int l = leftIndex; l <= rightIndex; l++) {
 			if (array[l] > max) {
 				max = array[l];
-			} else {
+			} else if (array[l] < min) {
 				min = array[l];
 			}
 		}
 		max += 1;
 
-		int[] aux = new int[max];
+		if (min < 0) {
+			min = Math.abs(min);
+		} else {
+			min = -min;
+		}
+
+		int[] aux = new int[max += min];
 
 		// 1º Passo: contagem da frequência do array;
 		for (int i = leftIndex; i <= rightIndex; i++) {
-			aux[array[i]] += 1;
+			aux[array[i] + min] += 1;
 		}
 		aux[0] += leftIndex;
 
@@ -44,8 +50,8 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 
 		// 3º Passo: repasse ordenado para novo array;
 		for (int k = rightIndex; k >= leftIndex; k--) {
-			sorted[aux[array[k]] - 1] = array[k];
-			aux[array[k]] -= 1;
+			sorted[aux[array[k] + min] - 1] = array[k];
+			aux[array[k] + min] -= 1;
 		}
 
 		for (int z = leftIndex; z <= rightIndex; z++) {
