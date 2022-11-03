@@ -42,7 +42,7 @@ public class StudentSortingTest {
 	private void getImplementation() {
 		// TODO O aluno deve instanciar sua implementação abaixo ao invés de
 		// null
-		this.implementation = new ExtendedCountingSort();
+		this.implementation = new CountingSort();
 	}
 
 	public void populaVetorTamanhoPar(Integer[] arrayPadrao) {
@@ -106,6 +106,8 @@ public class StudentSortingTest {
 		genericTest(vetorValoresRepetidos);
 	}
 
+	// teste vai funcionar apenas no CountSort, pois tem valores negativos no array
+	// usado no teste;
 	@Test
 	public void testSort06() {
 		genericTest(vetorValoresNegativos);
