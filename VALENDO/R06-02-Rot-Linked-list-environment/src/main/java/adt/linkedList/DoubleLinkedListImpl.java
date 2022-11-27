@@ -29,16 +29,17 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 
 	@Override
 	public void insertFirst(T element) {
-		DoubleLinkedListNode newNode = new DoubleLinkedListNode<T>();
-		if(isEmpty()) {
-			setLast(newNode);
-		}
-		newNode.setData(element);
-		newNode.setNext(this.getHead());
-		newNode.setPrevious(new DoubleLinkedListNode<>());
-		((DoubleLinkedListNode<T>)this.getHead()).setPrevious(newNode);
-		this.setHead(newNode);
-		
+		if(element != null) {
+			DoubleLinkedListNode newNode = new DoubleLinkedListNode<T>();
+			newNode.setData(element);
+			newNode.setNext(this.getHead());
+			newNode.setPrevious(new DoubleLinkedListNode<>());
+			((DoubleLinkedListNode<T>)this.getHead()).setPrevious(newNode);
+			if(this.getLast().isNIL()) {
+				this.setHead(newNode);
+			}
+			this.setHead(newNode);
+		}	
 	}
 
 	@Override
@@ -59,6 +60,27 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 			this.setHead(this.getLast());
 		   } 
 			this.getLast().setNext(new SingleLinkedListNode<>()); 
+		}
+	}
+
+	@Override
+	public void remove(T element) {
+		if(element != null) {
+			if(this.getHead().equals(element)) {
+				this.removeFirst();
+			}
+			else {
+				DoubleLinkedListNode<T> aux = (DoubleLinkedListNode<T>) this.getHead();
+				
+				while(!aux.isNIL() && !aux.getData().equals(element)) {
+					aux = (DoubleLinkedListNode<T>) aux.next;
+				}
+
+				if(!aux.isNIL()) {
+					aux.getPrevious().setNext(aux.getNext());
+					((DoubleLinkedListNode) aux.getNext()).setPrevious(aux.getPrevious());
+				}
+			}
 		}
 	}
 
