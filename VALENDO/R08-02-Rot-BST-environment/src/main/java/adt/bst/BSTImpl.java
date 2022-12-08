@@ -30,7 +30,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 		if(node.isEmpty()) {
 			return -1;
 		} else {
-			return 1 + Math.max(this.height((BSTNode<T>) node.getLeft()), height((BSTNode<T>) node.getRight()));
+			return Math.max(this.height((BSTNode<T>) node.getLeft()), height((BSTNode<T>) node.getRight())) + 1;
 		}
 	}
 
@@ -155,11 +155,41 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 	public void remove(T element) {
 		BSTNode node = search(element);
 
-		if(!isEmpty()) {
-			if(node.getData() == getRoot().getData()) {
-				this.root = null;
+		remove(node);
+	}
+
+	private void remove(BSTNode<T> node) {
+		if(!node.isEmpty()) {
+			if(node.isLeaf()) {
+				node.setData(null);
+			} else if(isSingleChild(node)) {
+				if(node.getParent() != null) {
+					if(node.getParent().getData().compareTo(node.getData()) > 0) {
+						if(!node.getLeft().isEmpty()) {
+							node.getParent().setLeft(node.getLeft());
+							node.getLeft().setParent(node.getParent());
+						} else {
+							node.getParent().setLeft(node.getRight());
+							node.getRight().setLeft(node.getParent());
+						} 
+					} else {
+				
+						if(!node.getLeft().isEmpty()) {
+							node.getParent().setRight(node.getLeft());
+							node.getLeft().setParent(node.getParent());
+						} else {
+							node.getParent().setRight(node.getRight());
+							node.getRight().setParent(node.getParent());
+						}
+					}
+				} 
 			}
+			
 		}
+	}
+
+	private boolean isSingleChild(BSTNode node) {
+		return false;
 	}
 
 	@Override
