@@ -36,15 +36,17 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	@Override
 	public BSTNode<T> search(T element) {
-		return search(this.root, element);
+		return search(element, this.root);
 	}
 
-	private BSTNode<T> search(BSTNode<T> node, T element) {
+	private BSTNode<T> search(T element, BSTNode<T> node)  {
 		if(node.isEmpty()) return node;
 
-		if(element.compareTo((T) node.getData()) == 0) return node;
-		if(element.compareTo((T) node.getData()) > 0) return search((BSTNode) node.getLeft(), element);
-		else return search((BSTNode) node.getRight(), element);
+		if(element.compareTo((T) node.getData()) < 0) return search(element, (BSTNode<T>) node.getLeft());
+		if(element.compareTo((T) node.getData()) > 0) return search(element, (BSTNode<T>) node.getRight());
+		else {
+			return node;
+		}
 	}
 
 	@Override
@@ -68,7 +70,6 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 				insert((BSTNode<T>) node.getLeft(), element);
 			} else {
 				insert((BSTNode<T>) node.getRight(), element);
-
 			}
 		}
 	}
@@ -76,7 +77,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 	@Override
 	public BSTNode<T> maximum() {
 		if(isEmpty()) return null;
-		return maximum(this.root);
+		return maximum(root);
 	}
 
 	private BSTNode<T> maximum(BSTNode<T> node) {
