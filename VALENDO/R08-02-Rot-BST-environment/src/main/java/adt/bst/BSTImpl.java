@@ -36,22 +36,15 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	@Override
 	public BSTNode<T> search(T element) {
-		BSTNode<T> aux = this.root;
+		return search(this.root, element);
+	}
 
-		while(aux != null) {
-			if(aux.getData() == element) {
-				return aux;
-			}
-			if(element.compareTo(aux.getData()) < 0) {
-				aux = (BSTNode<T>) aux.getLeft();
-			}
+	private BSTNode<T> search(BSTNode node, T element) {
+		if(node.isEmpty()) return null;
 
-			if(element.compareTo(aux.getData()) > 0) {
-				aux = (BSTNode<T>) aux.getRight();
-			}
-		}
-
-		return null;
+		if(element.compareTo((T) node.getData()) == 0) return node;
+		if(element.compareTo((T) node.getData()) > 0) return search((BSTNode) node.getLeft(), element);
+		else return search((BSTNode) node.getRight(), element);
 	}
 
 	@Override
