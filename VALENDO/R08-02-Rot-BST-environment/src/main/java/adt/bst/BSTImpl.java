@@ -25,7 +25,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 	}
 
 	private int height(BSTNode<T> node) {
-		if(node == null) {
+		if(node.getData() == null) {
 			return -1;
 		} else {
 			return 1 + Math.max(height((BSTNode<T>) node.getLeft()), height((BSTNode<T>) node.getRight()));
@@ -34,7 +34,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	@Override
 	public BSTNode<T> search(T element) {
-		BSTNode<T> aux = getRoot();
+		BSTNode<T> aux = this.root;
 
 		while(aux != null) {
 			if(aux.getData() == element) {
@@ -87,26 +87,64 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	@Override
 	public BSTNode<T> maximum() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(isEmpty()) return null;
+		return maximum(this.root);
 	}
 
+	private BSTNode<T> maximum(BSTNode<T> node) {
+
+		while(node.getRight().getData() != null) {
+			node = (BSTNode<T>) node.getRight();
+		}
+		return node;
+	}
+	
 	@Override
 	public BSTNode<T> minimum() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(isEmpty()) return null;
+		return minimum(this.root);
+	}
+
+	private BSTNode<T> minimum(BSTNode<T> node) {
+		if(node.getLeft().getData() == null) return node;
+		else return minimum((BSTNode<T>) node.getLeft());
 	}
 
 	@Override
 	public BSTNode<T> sucessor(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		BSTNode<T> node = search(element);
+
+		if(node.getData() == null) return null;
+
+		if(node.getRight().getData() != null) {
+			return minimum((BSTNode<T>) node.getRight());
+		} else {
+			BSTNode<T> aux = (BSTNode) node.getParent();
+
+			while(aux != null && aux.getData().compareTo(node.getData()) < 0) {
+				aux = (BSTNode) aux.getParent();
+			}
+			return aux;
+		}
 	}
 
 	@Override
 	public BSTNode<T> predecessor(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		BSTNode<T> node = search(element);
+
+		if(node.getData() == null) return null;
+
+		if(node.getLeft().getData() != null) {
+			return maximum((BSTNode<T>) node.getLeft());
+		} else {
+			BSTNode<T> aux = (BSTNode<T>) node.getParent();
+
+			while(aux.getData() != null && aux.getData().compareTo(node.getData()) > 0) {
+				aux = (BSTNode<T>) aux.getParent();
+			}
+			return aux;
+
+		}
 	}
 
 	@Override
@@ -116,17 +154,12 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 		if(!isEmpty()) {
 			if(node.getData() == getRoot().getData()) {
 				this.root = null;
-			} else {
-				if()
-
 			}
-
 		}
 	}
 
 	@Override
 	public T[] preOrder() {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}
 
