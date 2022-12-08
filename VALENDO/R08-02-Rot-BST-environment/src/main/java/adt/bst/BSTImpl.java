@@ -30,7 +30,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 		if(node.isEmpty()) {
 			return -1;
 		} else {
-			return 1 + Math.max(height((BSTNode<T>) node.getLeft()), height((BSTNode<T>) node.getRight()));
+			return 1 + Math.max(this.height((BSTNode<T>) node.getLeft()), height((BSTNode<T>) node.getRight()));
 		}
 	}
 
@@ -129,20 +129,26 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 	@Override
 	public BSTNode<T> predecessor(T element) {
 		BSTNode<T> node = search(element);
+		BSTNode<T> aux = null;
 
-		if(node.isEmpty()) return null;
-
-		if(!node.getLeft().isEmpty()) {
-			return maximum((BSTNode<T>) node.getLeft());
-		} else {
-			BSTNode<T> aux = (BSTNode<T>) node.getParent();
-
-			while(aux.getData() != null && aux.getData().compareTo(node.getData()) > 0) {
-				aux = (BSTNode<T>) aux.getParent();
+		if(!node.isEmpty()) {
+			if(!node.getLeft().isEmpty()) {
+				aux = maximum((BSTNode<T>) node.getLeft());
+			} else {
+				BSTNode<T> parent = (BSTNode<T>) node.getParent();
+	
+				while(parent != null && node.equals(parent.getLeft())) {
+					node = parent;
+					parent = (BSTNode<T>) parent.getParent();
+				}
+				aux =  parent;
+	
 			}
-			return aux;
-
+			
 		}
+
+		return aux;
+
 	}
 
 	@Override
