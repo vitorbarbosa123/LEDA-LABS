@@ -3,6 +3,7 @@ package adt.heap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import util.Util;
 
 import util.Util;
 
@@ -84,8 +85,23 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 	 * para subir os elementos na heap.
 	 */
 	private void heapify(int position) {
-		// TODO Implement htis method.
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(position >= 0) {
+			int largest; 
+			int left = left(position);
+			int right = right(position);
+			if(left <= this.index && comparator.compare(array[left], array[position]) > 0)  {
+				largest = left;
+			} else {
+				largest = position;
+			}
+			if(right <= this.index && comparator.compare(array[right], array[largest])> 0) {
+				largest = right;
+			}
+			if(largest != position) {
+				Util.swap(array, position, largest);
+				heapify(array, largest);
+			}
+		}
 	}
 
 	@Override
