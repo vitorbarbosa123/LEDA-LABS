@@ -70,20 +70,35 @@ public class MetodosRecursivos {
 	}
 
 	public long potenciaDe2(int expoente) {
-		int result = 1;
+		long result = 2;
+
+		if(expoente == 0 ) {
+			return result = 1;
+		}
+		else if(expoente == 1) {
+			return result;
+		} else {
+			return result * potenciaDe2(expoente - 1);
+		}
 		// TODO IMPLEMENTE (USANDO RECURSAO) O CODIGO PARA PRODUZIR A N-ESIMA
 		// POTENCIA
 		// DE 2
-		return result;
 	}
 
 	public double progressaoAritmetica(double termoInicial, double razao, int n) {
 		double result = 0;
+		result = termoInicial + razao;
+		if(n == razao) {
+			return result;
+		} else {
+			return progressaoAritmetica( result, razao, n - 1);
+		}
+
+
 		// TODO IMPLEMENTE SEU CODIGO (USANDO RECURSAO) DE ENCONTRAR O n-ESIMO
 		// TERMO
 		// DA PROGRESSAO ARITMETICA, DADO O TERMO INICIAL E A RAZAO
 		// VOCE NAO PODE USAR A FORMULA QUE CALCULA O N-ESIMO TERMO. DEVE USAR RECURSAO
-		return result;
 	}
 
 	public double progressaoGeometrica(double termoInicial, double razao, int n) {
@@ -100,8 +115,12 @@ public class MetodosRecursivos {
 		int[] arr = new int[]{1,2,3};
 		int factorial = 5;
 		int fibo = 3;
+		int potencia = 1;
 		Object[] notNull = new Object[]{1,2,3};
-		System.out.println(mr.countNotNull(notNull));
+		double termoInicial = 4;
+		double razao = 3;
+		int n = 16;
+		System.out.println(mr.progressaoAritmetica(termoInicial, razao, n));
 	}
 	
 }
