@@ -1,30 +1,34 @@
 package recursao;
 
+import java.util.Arrays;
+
 public class MetodosRecursivos {
 
 	public int calcularSomaArray(int[] array){
-		int result = 0;
 		// TODO ESCREVA AQUI O CÓDIGO (USANDO RECURSAO) PARA CALCULAR A SOMA
 		// DOS ELEMENTOS DE UM ARRAY
+		
+		int result = 0;
+		int[] newArr = new int[array.length - 1];
 		if(array.length == 1) {
-			result += array[-1];
-			return result;
+			result = array[0];
 		} else {
-			result += array[-1];
-			for(int i = 0; i < array.length; i++) {
-				array[i] = array[i+1];
-				}
-			calcularSomaArray(array);
+			array[0] = array[0] + array[array.length -1];	
+			for(int i = 0; i < array.length - 1; i++) {
+				newArr[i] = array[i];
 			}
-			return result;
+			return calcularSomaArray(newArr);
+		}
+		return result;
 	}
 	public long calcularFatorial(int n) {
-		long result = 1;
 		// TODO ESCREVA AQUI O CÓDIGO (USANDO RECURSAO) PARA CALCULAR E IMPRIMIR
 		// O FATORIAL DO PARAMETRO
 		// DE ACORDO COM O QUE FOI MOSTRADO NO EXERCCICIO. OBSERVE QUE SENDO O
 		// METODO
 		// RECURSIVO, O FATORIAL DOS NUMEROS ANTERIORES TAMBEM VAO SER IMPRESSOS
+
+		long result = 1;
 		if(n == 0) {
 			return result;
 		} else {
@@ -46,27 +50,40 @@ public class MetodosRecursivos {
 		int i = 1;
 		int j = 2;
 		if(n < 2) {
-			return result;
+			return n;
 		} else {
 			return calcularFibonacci(n - i) + calcularFibonacci(n - j);
 		}
 	}
+
+
 
 	public int countNotNull(Object[] array) {
 		int result = 0;
 		// TODO IMPLEMENTE AQUI O CODIGO QUE CONTA (USANDO RECURSAO) A
 		// QUANTIDADE DE ELEMENTOS NAO NULOS
 		// DE UM ARRAY DE OBJETOS RECEBIDO COMO PARAMETRO
-		if(array[0] == null) {
-			return result;
-		} else {
-			if(array[0] != null) {
-				result += 1;
-				array[0] = array[1];
-				countNotNull(array);
+
+		return this.countNotNull(array, result);
+	}
+
+	private int countNotNull(Object[] array, int number) {
+
+		Object[] newArr = new Object[array.length];
+
+		for(int i = 0; i < array.length; i++) {
+			if(array[i] != null) {
+				number += 1;
+			} else {
+				array[i] = array[array.length - 1];
+				for(int j = i; j < array.length; j++) {
+					newArr[j] = array[j];
+					return countNotNull(newArr, number);
+				}
 			}
+				
 		}
-		return result;
+		return number;
 	}
 
 	public long potenciaDe2(int expoente) {
@@ -86,12 +103,12 @@ public class MetodosRecursivos {
 	}
 
 	public double progressaoAritmetica(double termoInicial, double razao, int n) {
-		double result = 0;
-		result = termoInicial + razao;
-		if(n == razao) {
+		double result = termoInicial;
+		
+		if(n == 1) {
 			return result;
 		} else {
-			return progressaoAritmetica( result, razao, n - 1);
+			return progressaoAritmetica( termoInicial + razao, razao, n - 1);
 		}
 
 
@@ -102,25 +119,32 @@ public class MetodosRecursivos {
 	}
 
 	public double progressaoGeometrica(double termoInicial, double razao, int n) {
-		double result = 1;
 		// TODO IMPLEMENTE SEU CODIGO (USANDO RECURSAO) DE ENCONTRAR O n-ESIMO
 		// TERMO
 		// DA PROGRESSAO GEOMETRICA, DADO O TERMO INICIAL E A RAZAO
 		// VOCE NAO PODE USAR A FORMULA QUE CALCULA O N-ESIMO TERMO. DEVE USAR RECURSAO
-		return result;
+		double result = termoInicial;
+		System.out.println(result);
+		System.out.println(n);
+
+		if(n == 1) {
+			return result;
+		} else {
+			return progressaoGeometrica( termoInicial * razao, razao, n - 1);
+		}
 	}
 	
 	public static void main(String args[]) {
 		MetodosRecursivos mr = new MetodosRecursivos();
-		int[] arr = new int[]{1,2,3};
-		int factorial = 5;
-		int fibo = 3;
+		int[] arr = new int[]{1,2,3,4,5};
+		int factorial = 10;
+		int fibo = 20;
 		int potencia = 1;
-		Object[] notNull = new Object[]{1,2,3};
-		double termoInicial = 4;
-		double razao = 3;
-		int n = 16;
-		System.out.println(mr.progressaoAritmetica(termoInicial, razao, n));
+		Object[] notNull = new Object[]{1,null,null,1};
+		double termoInicial = 3;
+		double razao = 4;
+		int n = 5;
+		System.out.println(mr.progressaoGeometrica(termoInicial, razao, n));
 	}
 	
 }
