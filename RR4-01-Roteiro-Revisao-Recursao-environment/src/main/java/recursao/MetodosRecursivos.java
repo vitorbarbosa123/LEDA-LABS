@@ -63,27 +63,34 @@ public class MetodosRecursivos {
 		// TODO IMPLEMENTE AQUI O CODIGO QUE CONTA (USANDO RECURSAO) A
 		// QUANTIDADE DE ELEMENTOS NAO NULOS
 		// DE UM ARRAY DE OBJETOS RECEBIDO COMO PARAMETRO
+		Object[] newArr = new Object[array.length - 1];
 
-		return this.countNotNull(array, result);
-	}
-
-	private int countNotNull(Object[] array, int number) {
-
-		Object[] newArr = new Object[array.length];
+		if(array.length == 1) {
+			return result;
+		}
 
 		for(int i = 0; i < array.length; i++) {
-			if(array[i] != null) {
-				number += 1;
-			} else {
-				array[i] = array[array.length - 1];
-				for(int j = i; j < array.length; j++) {
-					newArr[j] = array[j];
-					return countNotNull(newArr, number);
-				}
+			if(array[i] == null) {
+				array[i] = array[array.length - 1];	
+				array[array.length - 1] = null;				
 			}
-				
 		}
-		return number;
+
+		for(int j = 0; j < array.length - 1; j++) {
+			newArr[j] = array[j];
+		}
+
+		for(int k = 0; k < array.length; k++) {
+			if(array[k] != null) {
+				result += 1;
+			} 
+		}
+
+		if(result != 0) {
+			return result;
+		} else {
+			return countNotNull(newArr);
+		}
 	}
 
 	public long potenciaDe2(int expoente) {
@@ -124,8 +131,6 @@ public class MetodosRecursivos {
 		// DA PROGRESSAO GEOMETRICA, DADO O TERMO INICIAL E A RAZAO
 		// VOCE NAO PODE USAR A FORMULA QUE CALCULA O N-ESIMO TERMO. DEVE USAR RECURSAO
 		double result = termoInicial;
-		System.out.println(result);
-		System.out.println(n);
 
 		if(n == 1) {
 			return result;
@@ -140,11 +145,11 @@ public class MetodosRecursivos {
 		int factorial = 10;
 		int fibo = 20;
 		int potencia = 1;
-		Object[] notNull = new Object[]{1,null,null,1};
+		Object[] notNull = new Object[]{1,null,1,1};
 		double termoInicial = 3;
 		double razao = 4;
 		int n = 5;
-		System.out.println(mr.progressaoGeometrica(termoInicial, razao, n));
+		System.out.println(mr.countNotNull(notNull));
 	}
 	
 }
