@@ -137,19 +137,5 @@ public class MetodosRecursivos {
 		} else {
 			return progressaoGeometrica( termoInicial * razao, razao, n - 1);
 		}
-	}
-	
-	public static void main(String args[]) {
-		MetodosRecursivos mr = new MetodosRecursivos();
-		int[] arr = new int[]{1,2,3,4,5};
-		int factorial = 10;
-		int fibo = 20;
-		int potencia = 1;
-		Object[] notNull = new Object[]{1,null,1,1};
-		double termoInicial = 3;
-		double razao = 4;
-		int n = 5;
-		System.out.println(mr.countNotNull(notNull));
-	}
-	
+	}	
 }
