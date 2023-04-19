@@ -48,9 +48,6 @@ public class HybridMergeSort<T extends Comparable<T>> extends
 				merge(array, leftIndex, middle ,rightIndex);
 			}
 		}
-		System.out.println(MERGESORT_APPLICATIONS);
-		System.out.println(INSERTIONSORT_APPLICATIONS);
-
 	}
 
 	private T[] insertion(T[] array, int leftIndex, int rightIndex) {
