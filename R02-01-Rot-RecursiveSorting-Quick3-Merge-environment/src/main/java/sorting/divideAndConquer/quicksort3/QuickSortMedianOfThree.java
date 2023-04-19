@@ -25,19 +25,39 @@ public class QuickSortMedianOfThree<T extends Comparable<T>> extends
 	public void sort(T[] array, int leftIndex, int rightIndex) {
 
 		if(leftIndex < rightIndex) {
-			int pivot = quick(array, leftIndex, rightIndex);
+			T[] orderPivot = sortingPivot(array, leftIndex, rightIndex);
+			int pivot = quick(orderPivot, leftIndex, rightIndex);
 
-			sort(array, leftIndex, pivot - 1);
-			sort(array, pivot + 1, rightIndex);
+			sort(orderPivot, leftIndex, pivot - 1);
+			sort(orderPivot, pivot + 1, rightIndex);
 		}
 	}
+
+	private T[] sortingPivot(T[] array, int leftIndex, int rightIndex) {
+
+		int middle = (leftIndex + rightIndex) / 2;
+
+		if(array[leftIndex].compareTo(array[middle]) > 0) {
+			Util.swap(array, leftIndex, middle);
+		}
+		if(array[leftIndex].compareTo(array[rightIndex]) > 0) {
+			Util.swap(array, leftIndex, rightIndex);
+		}
+
+		if(array[middle].compareTo(array[rightIndex]) > 0) {
+			Util.swap(array, middle, rightIndex);
+		}
+
+		Util.swap(array, middle, rightIndex - 1);
+		return array;
+	}
+
+
 
 	private int quick(T[] array, int leftIndex, int rightIndex) {
 
 		int i = leftIndex;
-		int middle = (leftIndex + rightIndex) / 2;
-		int pivot = (int) (leftIndex + middle + rightIndex) / 3;
-		System.out.println(Arrays.toString(array));
+		int pivot = rightIndex - 1;
 
 		for(int j = i + 1; j <= rightIndex; j++) {
 			if(array[j].compareTo(array[pivot]) < 0) {
