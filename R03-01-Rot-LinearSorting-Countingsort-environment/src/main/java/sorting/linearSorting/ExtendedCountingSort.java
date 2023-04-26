@@ -54,13 +54,19 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 
 		// Criando array do tamanho do array original
 		Integer[] result = new Integer[array.length];
-		 for(int p = rightIndex; p >= leftIndex; p--) {
+
+		// Ordenando elementos em array auxiliar e diminuindo em array de contagem
+		for(int p = rightIndex; p >= leftIndex; p--) {
 			result[frequence[array[p] - menor] - 1] = array[p];
 	
 			frequence[array[p] - menor] -= 1;
 		}
 
-		return result;
+		// repassando array ordenado para array original
+		for (int i = leftIndex; i <= rightIndex; i++)
+			array[i] = result[i - leftIndex];
+
+		return array;
  	}
 
 }
