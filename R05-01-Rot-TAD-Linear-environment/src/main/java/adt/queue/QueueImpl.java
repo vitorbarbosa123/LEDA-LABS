@@ -44,7 +44,6 @@ public class QueueImpl<T> implements Queue<T> {
 		if(!isFull()) {
 			if(this.head() == null) {
 				head++;
-				System.out.println(array[head]);
 				array[head] = element;
 				tail++;
 			} else {

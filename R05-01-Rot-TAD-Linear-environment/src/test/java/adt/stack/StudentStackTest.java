@@ -8,8 +8,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import adt.queue.QueueImpl;
-
 public class StudentStackTest {
 
 	public Stack<Integer> stack1;
@@ -34,9 +32,9 @@ public class StudentStackTest {
 
 	private void getImplementations() {
 		// TODO O aluno deve ajustar aqui para instanciar sua implementação
-		stack1 = new StackImpl(5);
-		stack2 = new StackImpl(5);
-		stack3 = new StackImpl(5);
+		stack1 = new StackImpl<>(5);
+		stack2 = new StackImpl<>(5);
+		stack3 = new StackImpl<>(5);
 	}
 
 	// MÉTODOS DE TESTE

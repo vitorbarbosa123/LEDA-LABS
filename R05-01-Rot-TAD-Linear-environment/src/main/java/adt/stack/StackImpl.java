@@ -1,5 +1,7 @@
 package adt.stack;
 
+import java.util.Arrays;
+
 public class StackImpl<T> implements Stack<T> {
 
 	private T[] array;
@@ -39,8 +41,10 @@ public class StackImpl<T> implements Stack<T> {
 		T item = null;
 		if(!isEmpty()) {
 			item = this.top();
-
+			array[top] = array[top+1];
+			top--;
 		}
+
 		return item;
 		
 	}
