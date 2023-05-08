@@ -6,14 +6,12 @@ public class CircularQueue<T> implements Queue<T> {
 	private int tail;
 	private int head;
 	private int elements;
-	private int middle;
 
 	public CircularQueue(int size) {
 		array = (T[]) new Object[size];
 		head = -1;
 		tail = -1;
 		elements = 0;
-		middle = (0 + array.length - 1) / 2;
 	}
 
 	@Override

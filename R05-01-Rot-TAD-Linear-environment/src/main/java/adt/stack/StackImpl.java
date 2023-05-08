@@ -1,7 +1,5 @@
 package adt.stack;
 
-import java.util.Arrays;
-
 public class StackImpl<T> implements Stack<T> {
 
 	private T[] array;

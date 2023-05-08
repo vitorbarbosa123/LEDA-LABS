@@ -1,7 +1,5 @@
 package adt.queue;
 
-import java.util.Arrays;
-
 public class QueueImpl<T> implements Queue<T> {
 
 	private T[] array;
