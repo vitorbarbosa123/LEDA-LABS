@@ -18,19 +18,46 @@ public class QueueUsingStack<T> implements Queue<T> {
 	@Override
 	public void enqueue(T element) throws QueueOverflowException {
 		if(!isFull()) {
-			stack1.push(element);
+			try {
+				stack1.push(element);
+			} catch (StackOverflowException e) {
+				e.printStackTrace();
+			}
 		}
-	}
+ 	}
 
 	@Override
 	public T dequeue() throws QueueUnderflowException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T result = null;
+		if(!isEmpty()) {
+			try {
+				stack1ToStack2();
+				result = stack2.pop();
+				stack2ToStack1();
+			} catch (StackOverflowException e) {
+				e.printStackTrace();
+			} catch (StackUnderflowException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
 	}
 
 	@Override
 	public T head() {
 		T head = null;
+		if(!stack1.isEmpty()) {
+			try {
+				stack1ToStack2();
+				head = stack2.top();
+				stack2ToStack1();
+			} catch (StackOverflowException e) {
+				e.printStackTrace();
+			} catch (StackUnderflowException e) {
+				e.printStackTrace();
+			}
+		}
 	
 		return head;
 	}
