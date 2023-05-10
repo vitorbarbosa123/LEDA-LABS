@@ -48,6 +48,8 @@ public class QueueImpl<T> implements Queue<T> {
 				tail++;
 				array[tail] = element;
 			}
+		} else {
+			throw new QueueOverflowException();
 		}
 	}
 
@@ -57,8 +59,10 @@ public class QueueImpl<T> implements Queue<T> {
 		if(!isEmpty()) {
 			shiftLeft();
 			tail--;
+			return item;
+		} else {
+			throw new QueueUnderflowException();
 		}
-		return item;
 	}
 
 }

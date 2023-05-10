@@ -23,6 +23,8 @@ public class QueueUsingStack<T> implements Queue<T> {
 			} catch (StackOverflowException e) {
 				e.printStackTrace();
 			}
+		} else {
+			throw new QueueOverflowException();
 		}
  	}
 
@@ -39,6 +41,8 @@ public class QueueUsingStack<T> implements Queue<T> {
 			} catch (StackUnderflowException e) {
 				e.printStackTrace();
 			}
+		} else {
+			throw new QueueUnderflowException();
 		}
 
 		return result;
@@ -74,15 +78,27 @@ public class QueueUsingStack<T> implements Queue<T> {
 
 	private void stack1ToStack2() throws StackOverflowException, StackUnderflowException {
 		while(!stack1.isEmpty()) {
-			T elem = stack1.pop();
-			stack2.push(elem);
-		}
+			try {
+				T elem = stack1.pop();
+				stack2.push(elem);
+			} catch (StackOverflowException e) {
+				e.printStackTrace();
+			} catch (StackUnderflowException e) {
+				e.printStackTrace();
+			}
+		} 
 	}
 
 	private void stack2ToStack1() throws StackOverflowException, StackUnderflowException {
 		while(!stack2.isEmpty()) {
-			T elem = stack2.pop();
-			stack1.push(elem);
+			try {
+				T elem = stack2.pop();
+				stack1.push(elem);
+			} catch (StackOverflowException e) {
+				e.printStackTrace();
+			} catch (StackUnderflowException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

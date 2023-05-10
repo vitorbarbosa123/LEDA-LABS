@@ -34,6 +34,8 @@ public class CircularQueue<T> implements Queue<T> {
 				}	
 			}
 			elements++;
+		} else {
+			throw new QueueOverflowException();
 		}
 	}
 
@@ -48,8 +50,10 @@ public class CircularQueue<T> implements Queue<T> {
 			}
 			tail--;
 			elements--;
+			return item;
+		} else {
+			throw new QueueUnderflowException();
 		}
-		return item;
 	}
 
 	@Override
