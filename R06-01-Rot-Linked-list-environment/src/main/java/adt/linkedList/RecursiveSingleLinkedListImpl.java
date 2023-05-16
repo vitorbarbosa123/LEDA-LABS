@@ -12,38 +12,133 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		boolean result = false;
+
+		if(getData() == null) {
+			result = true;
+		} 
+		return result;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int result = 0;
+		if(!isEmpty()) {
+			RecursiveSingleLinkedListImpl<T> next = getNext();
+			result++;
+			result = size(result, next);
+		}
+
+		return result;
+	}
+
+	private int size(int result, RecursiveSingleLinkedListImpl<T> next) {
+		if(!(next.getData() == null)) {
+			result++;
+			RecursiveSingleLinkedListImpl<T> aux = next.getNext();
+			result = size(result, aux);
+		} 
+
+		return result;
 	}
 
 	@Override
 	public T search(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T result = null;
+
+		if(!isEmpty()) {
+			if(getData().equals(element)) {
+				result = getData();
+			} else {
+				RecursiveSingleLinkedListImpl<T> next = getNext();
+				result = search(element, next);
+			}
+		}
+
+		return result;
+	}
+
+	private T search(T element, RecursiveSingleLinkedListImpl<T> next) {
+		T result = null;
+
+		if(!(next.getData() == null)) {
+			if(next.getData().equals(element)) {
+				result = next.getData();
+			} else {
+				RecursiveSingleLinkedListImpl<T> aux = next.getNext();
+				search(element, aux);
+			}
+		}
+
+		return result;
 	}
 
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(isEmpty()) {
+			setData(element);
+			setNext(new RecursiveSingleLinkedListImpl<T>());
+		} else {
+			RecursiveSingleLinkedListImpl<T> next = getNext();
+			insert(element, next);
+		}
+	}
+
+	private void insert(T element, RecursiveSingleLinkedListImpl<T> next) {
+		if(next.getData() == null) {
+			next.setData(element);
+			next.setNext(new RecursiveSingleLinkedListImpl<T>());
+		} else {
+			RecursiveSingleLinkedListImpl<T> aux = next.getNext();
+			insert(element, aux);
+		}
 	}
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(!isEmpty()) {
+			if(getData().equals(element)) {
+				setData(getNext().getData());
+				setNext(getNext().getNext());
+			} else {
+				RecursiveSingleLinkedListImpl<T> next = getNext();
+				remove(element, next);
+			}
+		}
+	}
+
+	private void remove(T element, RecursiveSingleLinkedListImpl<T> next) {
+		if(next.getData().equals(element)) {
+			setData(next.getData());
+			setNext(next.getNext());
+		} else {
+			RecursiveSingleLinkedListImpl<T> aux = next.getNext();
+			remove(element, aux);
+		}
 	}
 
 	@Override
 	public T[] toArray() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T[] array = (T[]) new Comparable[size()];
+
+		if(!isEmpty()) {
+			int i = 0;
+			array = toArray(array, this, i);
+
+		}
+		return array;
+	}
+
+	private T[] toArray(T[] array, RecursiveSingleLinkedListImpl<T> node, int i) {
+
+			if(!(node.getNext() == null)) {
+				array[i] = node.getData();
+				i++;
+				RecursiveSingleLinkedListImpl<T> aux = next.getNext();
+				array = toArray(array, aux, i);
+		}
+
+		return array;
 	}
 
 	public T getData() {

@@ -7,14 +7,15 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 
 	@Override
 	public void insertFirst(T element) {
-		DoubleLinkedListNode<T> node = new DoubleLinkedListNode<T>();
+		DoubleLinkedListNode<T> node = new DoubleLinkedListNode<T>(element, null, null);
 		node.setNext(getHead());
 		node.setPrevious(new DoubleLinkedListNode<T>());
+		// head.previous = node
 		if(getHead().isNIL()) {
 			setLast(node);
 		}
 		setHead(node);
-	}
+	}	
 
 	@Override
 	public void removeFirst() {
@@ -23,13 +24,15 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 
 			if(getHead().isNIL()) {
 				setLast((DoubleLinkedListNode<T>) getHead());
-			} 
+			} else {
+				// head.previous = NIL
+			}
 		}
 	}
 
 	@Override
 	public void removeLast() {
-		if(!getLast().isNIL()) {
+		if(getLast() != null) {
 			setLast(getLast().getPrevious());
 
 			if(getLast().isNIL()) {
