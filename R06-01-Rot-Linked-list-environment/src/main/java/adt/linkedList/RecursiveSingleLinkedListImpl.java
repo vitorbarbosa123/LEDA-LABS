@@ -123,22 +123,18 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 		if(!isEmpty()) {
 			int i = 0;
-			array = toArray(array, this, i);
+			toArray(array, this, i);
 
 		}
 		return array;
 	}
 
-	private T[] toArray(T[] array, RecursiveSingleLinkedListImpl<T> node, int i) {
-
-			if(!(node.getNext() == null)) {
+	private void toArray(T[] array, RecursiveSingleLinkedListImpl<T> node, int i) {
+			if(!node.isEmpty()) {
 				array[i] = node.getData();
 				i++;
-				RecursiveSingleLinkedListImpl<T> aux = next.getNext();
-				array = toArray(array, aux, i);
+				toArray(array, node.getNext(), i);
 		}
-
-		return array;
 	}
 
 	public T getData() {
