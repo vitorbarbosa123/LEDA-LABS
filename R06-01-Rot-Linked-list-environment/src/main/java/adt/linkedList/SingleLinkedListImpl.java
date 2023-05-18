@@ -28,9 +28,9 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 	@Override
 	public T search(T element) {
 		SingleLinkedListNode<T> aux =  getHead();
-
-		while(!aux.isNIL() && !aux.getData().equals(element)) {
-			aux = aux.getNext();
+		
+			while(!aux.isNIL() && !aux.getData().equals(element)) {
+				aux = aux.getNext();
 		}
 		return aux.getData();
 	}
