@@ -12,14 +12,49 @@ public class FloorCeilHeapImpl extends HeapImpl<Integer> implements FloorCeilHea
 
 	@Override
 	public Integer floor(Integer[] array, double numero) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		Integer floor = null;
+		if (array != null) {
+			for (Integer value : array) {
+				this.insert(value);
+			}
+			floor = floor(numero, floor);
+		}
+		return floor;
+	}
+
+	private Integer floor(double numero, Integer floor) {
+		Integer root = this.extractRootElement();
+		if (root != null) {
+			if (numero >= root && (floor == null || root >= floor)) {
+				floor = this.floor(numero, root);
+			} else {
+				floor = this.floor(numero, floor);
+			}
+		}
+		return floor;
 	}
 
 	@Override
 	public Integer ceil(Integer[] array, double numero) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		Integer ceil = null;
+		if (array != null) {
+			for (Integer value : array) {
+				this.insert(value);
+			}
+			ceil = ceil(numero, ceil);
+		}
+		return ceil;
 	}
 
+	private Integer ceil(double numero, Integer ceil) {
+		Integer root = this.extractRootElement();
+		if (root != null) {
+			if (numero <= root && (ceil == null || root <= ceil)) {
+				ceil = this.ceil(numero, root);
+			} else {
+				ceil = this.ceil(numero, ceil);
+			}
+		}
+		return ceil;
+	}
 }
