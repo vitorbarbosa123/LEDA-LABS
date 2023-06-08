@@ -24,7 +24,7 @@ public class OrderStatisticsHeapImpl<T extends Comparable<T>> implements OrderSt
 			for(T value : array) {
 				heap.add(value);
 			}
-			for(int i = k; i > 0; i++) {
+			for(int i = k; i > 0; i--) {
 				result = heap.poll();
 			}
 		}
