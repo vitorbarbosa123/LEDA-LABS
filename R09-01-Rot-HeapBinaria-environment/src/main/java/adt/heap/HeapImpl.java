@@ -116,6 +116,15 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 			}
 		}	
 	}
+	// private void insert(T[] array,T element) {
+	// 	this.index++;
+	// 	int size = this.size() - 1;
+	// 	while(size > 0 && comparator.compare(array[parent(size)], element) < 0) {
+	// 		array[size] = array[parent(size)];
+	// 		size = parent(size);
+	// 	}
+	// 	array[size] = element;
+	// }
 
 	@Override
 	public void buildHeap(T[] array) {
@@ -130,8 +139,9 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 
 	@Override
 	public T extractRootElement() {
-		T result = this.rootElement();
+		T result = null;
 		if(!isEmpty()) {
+			result = this.rootElement();
 			this.heap[0] = this.heap[index--];
 			this.heapify(0);
 		}
@@ -167,7 +177,7 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 
 	@Override
 	public int size() {
-		return index++;
+		return this.index+1;
 	}
 
 	public Comparator<T> getComparator() {
