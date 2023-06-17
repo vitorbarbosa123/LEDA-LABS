@@ -14,7 +14,7 @@ public class StudentBSTTest {
 	private BTNode<Integer> NIL = new BTNode<Integer>();
 
 	private void fillTree() {
-		Integer[] array = { 6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -40 };
+		Integer[] array = { 52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74};
 		for (int i : array) {
 			tree.insert(i);
 		}
@@ -151,5 +151,13 @@ public class StudentBSTTest {
 		assertEquals(new Integer(-40), tree.search(-40).getData());
 		assertEquals(new Integer(-34), tree.search(-34).getData());
 		assertEquals(NIL, tree.search(2534));
+	}
+
+	@Test
+	public void testIsAncestral() {
+
+		fillTree(); // 52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74
+
+		tree.findAncestral(tree.search(22),tree.search(26));
 	}
 }
